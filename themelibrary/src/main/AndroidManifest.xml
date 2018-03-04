@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.iamsdt.themelibrary">
+
+    <application
+        android:supportsRtl="true"
+        android:theme="@style/LibraryAppTheme">
+        <activity
+            android:name=".ColorActivity"
+            android:label="@string/title_activity_color"
+            android:theme="@style/LibraryAppTheme.NoActionBar"/>
+    </application>
+
+</manifest>
