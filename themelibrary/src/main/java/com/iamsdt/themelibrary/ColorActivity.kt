@@ -43,14 +43,24 @@ class ColorActivity : AppCompatActivity(),ClickListener {
      * array list contain theme name and it's id
      */
     private fun fillThemeIds() {
-        //fill array with styles ids
-        themes.add(MyTheme("Default", R.style.LibraryAppTheme_NoActionBar))
-        themes.add(MyTheme("Amber", R.style.amber_dark))
-        themes.add(MyTheme("Purple", R.style.purple_dark))
-        themes.add(MyTheme("Orange", R.style.orange))
-        themes.add(MyTheme("Cyan", R.style.cyan))
-        themes.add(MyTheme("Deep Orange", R.style.deeporange))
-        themes.add(MyTheme("Green", R.style.green))
+
+        val list = getThemes()
+
+        //if theme is not empty then add all
+        if (list.isNotEmpty()){
+            themes.addAll(list)
+        }
+
+        if (isDefaultEnabled){
+            //fill array with styles ids
+            themes.add(MyTheme("Default", R.style.LibraryAppTheme_NoActionBar))
+            themes.add(MyTheme("Amber", R.style.amber_dark))
+            themes.add(MyTheme("Purple", R.style.purple_dark))
+            themes.add(MyTheme("Orange", R.style.orange))
+            themes.add(MyTheme("Cyan", R.style.cyan))
+            themes.add(MyTheme("Deep Orange", R.style.deeporange))
+            themes.add(MyTheme("Green", R.style.green))
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -80,9 +90,36 @@ class ColorActivity : AppCompatActivity(),ClickListener {
     }
 
     companion object {
+        private val myThemes = ArrayList<MyTheme>()
+
+        private var isDefaultEnabled = true
+
         fun createIntent(context: Context): Intent {
             return Intent(context, ColorActivity::class.java)
         }
+
+        fun addMoreThemes(themes:ArrayList<MyTheme>){
+
+            //clear all data
+            myThemes.clear()
+
+            //add new data
+            myThemes.addAll(themes)
+        }
+
+        fun addMoreThemes(themes:ArrayList<MyTheme>,defaultEnabled:Boolean){
+
+            isDefaultEnabled = defaultEnabled
+
+            //clear all data
+            myThemes.clear()
+
+            //add new data
+            myThemes.addAll(themes)
+        }
+
+
+        private fun getThemes() = myThemes
     }
 
 }
