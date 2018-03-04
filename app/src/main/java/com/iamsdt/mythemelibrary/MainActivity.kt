@@ -4,6 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.iamsdt.themelibrary.ColorActivity
+import com.iamsdt.themelibrary.MyTheme
+import com.iamsdt.themelibrary.ThemeUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -21,8 +24,17 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         mainBtn.setOnClickListener {
-            //startActivityForResult(ColorActivity.createIntent(this),themeRequestCode)
+            ColorActivity.addMoreThemes(getList())
+            startActivityForResult(ColorActivity.createIntent(this),themeRequestCode)
         }
+    }
+
+    private fun getList(): ArrayList<MyTheme>{
+        val list = ArrayList<MyTheme>()
+        list.add(MyTheme("Red",R.style.red))
+        list.add(MyTheme("Teal",R.style.teal))
+
+        return list
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
