@@ -2,7 +2,6 @@ package com.iamsdt.mythemelibrary
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.SwitchPreference
 import android.support.v7.preference.CheckBoxPreference
 import android.support.v7.preference.ListPreference
 import android.support.v7.preference.Preference
@@ -23,19 +22,21 @@ class SettingsFragment: PreferenceFragmentCompat(),
 
         val count = preferenceScreen.preferenceCount
 
-        for (i in 0 until count) {
-            val p = preferenceScreen.getPreference(i)
-            when (p) {
-                is CheckBoxPreference -> {
-                    val value = sharedPreferences.getBoolean(p.key, false)
-                    setPreferenceSummery(p, value)
+        (0 until count)
+                .asSequence()
+                .map { preferenceScreen.getPreference(it) }
+                .forEach {
+                    when (it) {
+                        is CheckBoxPreference -> {
+                            val value = sharedPreferences.getBoolean(it.key, false)
+                            setPreferenceSummery(it, value)
+                        }
+                        else -> {
+                            val value = sharedPreferences.getString(it.key, "")
+                            setPreferenceSummery(it, value)
+                        }
+                    }
                 }
-                else -> {
-                    val value = sharedPreferences.getString(p.key, "")
-                    setPreferenceSummery(p, value)
-                }
-            }
-        }
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {

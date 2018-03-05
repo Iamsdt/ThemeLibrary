@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatDelegate
-import androidx.content.edit
-
 
 /**
  * Created by Shudipto Trafder on 1/18/2018.
