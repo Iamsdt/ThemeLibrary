@@ -65,7 +65,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 ````
 
 ### Customization
->This library is highly customizable..
+>This library is highly customizable... Let's customize with your needs
 
 If you want to provide your custom theme list(not default theme list)
 First crate theme in **Style.xml**
@@ -89,17 +89,21 @@ startActivityForResult(ColorActivity.createIntent(this),121)
 ````
 If you want to remove default theme
 ````
-ColorActivity.addMoreThemes(getList(),false)
+ColorActivity.addMoreThemes(list,false)
 ````
 If you want to change toolbar title with custom list
 ````            
-ColorActivity.addMoreThemes(getList(),"Color")
+ColorActivity.addMoreThemes(list,"Color")
 ````
 or,
 ````
-ColorActivity.addMoreThemes(getList(),false,"Color")
+ColorActivity.addMoreThemes(list,false,"Color")
 ````
 only change toolbar title
 ````
 ColorActivity.updateToolbarTitle("Color")
+````
+want to hide night mode icon
+````
+ColorActivity.hideNightModeIcon()
 ````
