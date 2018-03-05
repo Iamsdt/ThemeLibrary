@@ -48,4 +48,58 @@ Update **AndroidManifest.xml**
 </application>
 ````
 ####Step 3:
+Start ColorActivity
+````
+startActivityForResult(ColorActivity.createIntent(this),121)
+````
+now override `onActivityResult()` method and recreate the activity
+````
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 121){
+            if (resultCode == Activity.RESULT_OK) {
+                recreate()
+            }
+        }
+    }
+````
 
+###Customization
+>This library is highly customizable..
+
+If you want to provide your custom theme list(not default theme list)
+First crate theme in **Style.xml**
+````
+<style name="teal" parent="LibraryAppTheme.NoActionBar">
+    <item name="colorPrimary">@color/teal_500</item>
+    <item name="colorPrimaryDark">@color/teal_700</item>
+    <item name="colorAccent">@color/blue_500</item>
+    <item name="colorControlHighlight">@color/cyan_500</item>
+</style>
+````
+Create an ArrayList of MyTheme and fill the array
+````
+val list = ArrayList<MyTheme>()
+list.add(MyTheme("Red",R.style.red))
+````
+call AddMoreThemes() Method and start Activity
+````
+ColorActivity.addMoreThemes(getList())
+startActivityForResult(ColorActivity.createIntent(this),121)
+````
+If you want to remove default theme
+````
+ColorActivity.addMoreThemes(getList(),false)
+````
+If you want to change toolbar title with custom list
+````            
+ColorActivity.addMoreThemes(getList(),"Color")
+````
+or,
+````
+ColorActivity.addMoreThemes(getList(),false,"Color")
+````
+only change toolbar title
+````
+ColorActivity.updateToolbarTitle("Color")
+````
