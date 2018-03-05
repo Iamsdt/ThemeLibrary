@@ -84,13 +84,14 @@ class ColorActivity : AppCompatActivity(),ClickListener {
                     //night mode on
                     //now off night mode
                     turnOffNightMode(this@ColorActivity)
-                    recreate()
+                    setResult(Activity.RESULT_OK)
+                    restartActivity()
                     false
                 } else{
                     //night mode false
                     //now on night mode
                     turnOnNightMode(this@ColorActivity)
-                    recreate()
+                    restartActivity()
                     true
                 }
 
@@ -124,7 +125,11 @@ class ColorActivity : AppCompatActivity(),ClickListener {
         val sp = getSharedPreferences(ConstantUtil.colorSp, Context.MODE_PRIVATE)
         sp.edit { putInt(ConstantUtil.themeKey,themeCont.id) }
 
-        val restartIntent = Intent(this, ColorActivity::class.java)
+        restartActivity()
+    }
+
+    private fun restartActivity(){
+        val restartIntent = Intent(this@ColorActivity, ColorActivity::class.java)
         setResult(Activity.RESULT_OK)
 
         finish()
