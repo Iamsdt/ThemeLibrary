@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MyThemeLibrary</string>
     <string name="title_activity_color">ColorActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>

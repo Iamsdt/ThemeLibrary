@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
             ColorActivity.addMoreThemes(getList())
             startActivityForResult(ColorActivity.createIntent(this),themeRequestCode)
         }
+
+        settingsBtn.setOnClickListener({
+            startActivity(Intent(this@MainActivity,SettingsActivity::class.java))
+        })
     }
 
     private fun getList(): ArrayList<MyTheme>{
