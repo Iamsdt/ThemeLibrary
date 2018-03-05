@@ -11,4 +11,9 @@ allprojects {
         }   
     }
 ````
-now add 
+now add the dependency
+````
+dependencies {
+    compile 'com.github.Iamsdt:ThemeLibrary:1.5'
+}
+````
