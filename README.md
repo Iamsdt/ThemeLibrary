@@ -1,12 +1,12 @@
 # ThemeLibrary
 A very easy Android theme library
 
-###Getting Started
+### Getting Started
 
-###Prerequisites
+### Prerequisites
 The minimum api for this library is **17** (Android 4.2)
 
-###Installing
+### Installing
 Add it in your root `build.gradle` at the end of repositories:
 ````
 allprojects {
@@ -23,7 +23,7 @@ dependencies {
 }
 ````
 
-###Configuration
+### Configuration
 ##### Step 1:
 Change your parent of app theme to **LibraryAppTheme**
 >Note: No need to add primary color, primary dark color and accent color.
@@ -34,7 +34,7 @@ Change your parent of app theme to **LibraryAppTheme**
     .....
 </style>
 ````
-#####Step 2:
+##### Step 2:
 Update **AndroidManifest.xml**
 ````
 <application
@@ -47,7 +47,7 @@ Update **AndroidManifest.xml**
         
 </application>
 ````
-####Step 3:
+#### Step 3:
 Start ColorActivity
 ````
 startActivityForResult(ColorActivity.createIntent(this),121)
@@ -64,7 +64,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
     }
 ````
 
-###Customization
+### Customization
 >This library is highly customizable..
 
 If you want to provide your custom theme list(not default theme list)
