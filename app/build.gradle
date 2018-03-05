@@ -41,5 +41,6 @@ dependencies {
 
     //sweet kotlin
     implementation 'androidx.core:core-ktx:0.2'
-    implementation project(':themelibrary')
+
+    implementation 'com.github.Iamsdt:ThemeLibrary:1.7'
 }
