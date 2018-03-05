@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         mainBtn.setOnClickListener {
             ColorActivity.addMoreThemes(getList(),"Color")
+            ColorActivity.updateToolbarTitle("Color")
             startActivityForResult(ColorActivity.createIntent(this),themeRequestCode)
         }
 

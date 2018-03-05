@@ -179,10 +179,7 @@ class ColorActivity : AppCompatActivity(),ClickListener {
          */
         fun addMoreThemes(themes:ArrayList<MyTheme>,extraTitle:String){
 
-            if (extraTitle.isNotEmpty()){
-                this.extraTitle = extraTitle
-            }
-
+            updateToolbarTitle(extraTitle)
             //clear all data
             myThemes.clear()
 
@@ -218,9 +215,7 @@ class ColorActivity : AppCompatActivity(),ClickListener {
 
             isDefaultEnabled = defaultEnabled
 
-            if (extraTitle.isNotEmpty()){
-                this.extraTitle = extraTitle
-            }
+            updateToolbarTitle(extraTitle)
 
             //clear all data
             myThemes.clear()
@@ -229,6 +224,11 @@ class ColorActivity : AppCompatActivity(),ClickListener {
             myThemes.addAll(themes)
         }
 
+        fun updateToolbarTitle(extraTitle: String){
+            if (extraTitle.isNotEmpty()){
+                this.extraTitle = extraTitle
+            }
+        }
 
         /**
          * Getter method of theme list
