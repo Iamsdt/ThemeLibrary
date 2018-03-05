@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         mainBtn.setOnClickListener {
             ColorActivity.addMoreThemes(getList(),"Color")
-            ColorActivity.updateToolbarTitle("Color")
+            //ColorActivity.hideNightModeIcon()
             startActivityForResult(ColorActivity.createIntent(this),themeRequestCode)
         }
 

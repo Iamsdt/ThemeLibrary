@@ -12,7 +12,7 @@ import androidx.content.edit
 import kotlinx.android.synthetic.main.activity_color.*
 import kotlinx.android.synthetic.main.content_color.*
 
-class ColorActivity : AppCompatActivity(),ClickListener {
+class ColorActivity : AppCompatActivity(), ClickListener {
 
     private val themes = ArrayList<MyTheme>()
 
@@ -50,7 +50,7 @@ class ColorActivity : AppCompatActivity(),ClickListener {
      * array list contain theme name and it's id
      */
     private fun fillThemeIds() {
-        if (isDefaultEnabled){
+        if (isDefaultEnabled) {
             //fill array with styles ids
             themes.add(MyTheme("Default", R.style.LibraryAppTheme_NoActionBar))
             themes.add(MyTheme("Amber", R.style.amber_dark))
@@ -64,56 +64,52 @@ class ColorActivity : AppCompatActivity(),ClickListener {
         val list = getThemes()
 
         //if theme is not empty then add all
-        if (list.isNotEmpty()){
+        if (list.isNotEmpty()) {
             themes.addAll(list)
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item.itemId){
-            android.R.id.home -> {
-                onBackPressed()
-                //setResult(Activity.RESULT_OK)
-                finish()
-                return true
+        val id = item.itemId
+        if (id == android.R.id.home) {
+            onBackPressed()
+            //setResult(Activity.RESULT_OK)
+            finish()
+
+        } else if (id == R.id.nightMode && showNightModeIcon) {
+
+            nightModeStatus = if (nightModeStatus) {
+                //night mode on
+                //now off night mode
+                turnOffNightMode(this@ColorActivity)
+                setResult(Activity.RESULT_OK)
+                restartActivity()
+                false
+            } else {
+                //night mode false
+                //now on night mode
+                turnOnNightMode(this@ColorActivity)
+                restartActivity()
+                true
             }
-
-            R.id.nightMode ->{
-                nightModeStatus = if (nightModeStatus){
-                    //night mode on
-                    //now off night mode
-                    turnOffNightMode(this@ColorActivity)
-                    setResult(Activity.RESULT_OK)
-                    restartActivity()
-                    false
-                } else{
-                    //night mode false
-                    //now on night mode
-                    turnOnNightMode(this@ColorActivity)
-                    restartActivity()
-                    true
-                }
-
-                return true
-            }
-
-            else ->
-                return super.onOptionsItemSelected(item)
-
         }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-        menuInflater.inflate(R.menu.color,menu)
+        if (showNightModeIcon) {
+            menuInflater.inflate(R.menu.color, menu)
 
-        val nightMode = menu?.findItem(R.id.nightMode)
+            val nightMode = menu?.findItem(R.id.nightMode)
 
-        if (nightModeStatus) {
-            nightMode?.setIcon(R.drawable.ic_half_moon)
-        } else {
-            nightMode?.setIcon(R.drawable.ic_wb_sunny_black_24dp)
+            if (nightModeStatus) {
+                nightMode?.setIcon(R.drawable.ic_half_moon)
+            } else {
+                nightMode?.setIcon(R.drawable.ic_wb_sunny_black_24dp)
+            }
         }
 
         return true
@@ -123,12 +119,12 @@ class ColorActivity : AppCompatActivity(),ClickListener {
         val themeCont = themes[themeID]
 
         val sp = getSharedPreferences(ConstantUtil.colorSp, Context.MODE_PRIVATE)
-        sp.edit { putInt(ConstantUtil.themeKey,themeCont.id) }
+        sp.edit { putInt(ConstantUtil.themeKey, themeCont.id) }
 
         restartActivity()
     }
 
-    private fun restartActivity(){
+    private fun restartActivity() {
         val restartIntent = Intent(this@ColorActivity, ColorActivity::class.java)
         setResult(Activity.RESULT_OK)
 
@@ -139,7 +135,6 @@ class ColorActivity : AppCompatActivity(),ClickListener {
     }
 
     companion object {
-
         private var nightModeStatus = false
 
         private val myThemes = ArrayList<MyTheme>()
@@ -147,6 +142,12 @@ class ColorActivity : AppCompatActivity(),ClickListener {
         private var isDefaultEnabled = true
 
         private var extraTitle = ""
+
+        private var showNightModeIcon = true
+
+        fun hideNightModeIcon() {
+            showNightModeIcon = false
+        }
 
         /**
          * Create Intent for launcher class
@@ -162,7 +163,7 @@ class ColorActivity : AppCompatActivity(),ClickListener {
          * and send to the adapter
          * @param themes new theme list
          */
-        fun addMoreThemes(themes:ArrayList<MyTheme>){
+        fun addMoreThemes(themes: ArrayList<MyTheme>) {
 
             //clear all data
             myThemes.clear()
@@ -177,7 +178,7 @@ class ColorActivity : AppCompatActivity(),ClickListener {
          * @param themes new theme list
          * @param extraTitle title for the activity
          */
-        fun addMoreThemes(themes:ArrayList<MyTheme>,extraTitle:String){
+        fun addMoreThemes(themes: ArrayList<MyTheme>, extraTitle: String) {
 
             updateToolbarTitle(extraTitle)
             //clear all data
@@ -193,7 +194,7 @@ class ColorActivity : AppCompatActivity(),ClickListener {
          * @param themes new theme list
          * @param defaultEnabled if developer want to enabled or disable the default theme
          */
-        fun addMoreThemes(themes:ArrayList<MyTheme>,defaultEnabled:Boolean){
+        fun addMoreThemes(themes: ArrayList<MyTheme>, defaultEnabled: Boolean) {
 
             isDefaultEnabled = defaultEnabled
 
@@ -211,7 +212,7 @@ class ColorActivity : AppCompatActivity(),ClickListener {
          * @param defaultEnabled if developer want to enabled or disable the default theme
          * @param extraTitle title for the activity
          */
-        fun addMoreThemes(themes:ArrayList<MyTheme>,defaultEnabled:Boolean,extraTitle:String){
+        fun addMoreThemes(themes: ArrayList<MyTheme>, defaultEnabled: Boolean, extraTitle: String) {
 
             isDefaultEnabled = defaultEnabled
 
@@ -224,8 +225,8 @@ class ColorActivity : AppCompatActivity(),ClickListener {
             myThemes.addAll(themes)
         }
 
-        fun updateToolbarTitle(extraTitle: String){
-            if (extraTitle.isNotEmpty()){
+        fun updateToolbarTitle(extraTitle: String) {
+            if (extraTitle.isNotEmpty()) {
                 this.extraTitle = extraTitle
             }
         }
@@ -240,10 +241,10 @@ class ColorActivity : AppCompatActivity(),ClickListener {
          * this only change the value of sp
          * @param context for access sp
          */
-        private fun turnOnNightMode(context: Context){
-            val sharedPreferences = context.getSharedPreferences(ConstantUtil.NIGHT_MODE_SP_KEY,Context.MODE_PRIVATE)
+        private fun turnOnNightMode(context: Context) {
+            val sharedPreferences = context.getSharedPreferences(ConstantUtil.NIGHT_MODE_SP_KEY, Context.MODE_PRIVATE)
             sharedPreferences.edit {
-                putBoolean(ConstantUtil.NIGHT_MODE_VALUE_KEY,true)
+                putBoolean(ConstantUtil.NIGHT_MODE_VALUE_KEY, true)
             }
         }
 
@@ -252,10 +253,10 @@ class ColorActivity : AppCompatActivity(),ClickListener {
          * this only change the value of sp
          * @param context for access sp
          */
-        private fun turnOffNightMode(context: Context){
-            val sharedPreferences = context.getSharedPreferences(ConstantUtil.NIGHT_MODE_SP_KEY,Context.MODE_PRIVATE)
+        private fun turnOffNightMode(context: Context) {
+            val sharedPreferences = context.getSharedPreferences(ConstantUtil.NIGHT_MODE_SP_KEY, Context.MODE_PRIVATE)
             sharedPreferences.edit {
-                putBoolean(ConstantUtil.NIGHT_MODE_VALUE_KEY,false)
+                putBoolean(ConstantUtil.NIGHT_MODE_VALUE_KEY, false)
             }
         }
     }
