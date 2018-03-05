@@ -19,9 +19,15 @@ class ColorActivity : AppCompatActivity(),ClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //initialize theme
         ThemeUtils.initialize(this)
 
         setContentView(R.layout.activity_color)
+
+        //toolbar
+        if (extraTitle.isNotEmpty()) {
+            toolbar.title = extraTitle
+        }
         setSupportActionBar(toolbar)
 
         val manager = LinearLayoutManager(this,
@@ -74,19 +80,18 @@ class ColorActivity : AppCompatActivity(),ClickListener {
             }
 
             R.id.nightMode ->{
-                if (nightModeStatus){
+                nightModeStatus = if (nightModeStatus){
                     //night mode on
                     //now off night mode
                     turnOffNightMode(this@ColorActivity)
                     recreate()
-                    nightModeStatus = false
+                    false
                 } else{
                     //night mode false
                     //now on night mode
                     turnOnNightMode(this@ColorActivity)
                     recreate()
-                    nightModeStatus = true
-
+                    true
                 }
 
                 return true
@@ -129,11 +134,14 @@ class ColorActivity : AppCompatActivity(),ClickListener {
     }
 
     companion object {
+
         private var nightModeStatus = false
 
         private val myThemes = ArrayList<MyTheme>()
 
         private var isDefaultEnabled = true
+
+        private var extraTitle = ""
 
         /**
          * Create Intent for launcher class
@@ -159,6 +167,25 @@ class ColorActivity : AppCompatActivity(),ClickListener {
         }
 
         /**
+         * Add more theme to the list
+         * and send to the adapter
+         * @param themes new theme list
+         * @param extraTitle title for the activity
+         */
+        fun addMoreThemes(themes:ArrayList<MyTheme>,extraTitle:String){
+
+            if (extraTitle.isNotEmpty()){
+                this.extraTitle = extraTitle
+            }
+
+            //clear all data
+            myThemes.clear()
+
+            //add new data
+            myThemes.addAll(themes)
+        }
+
+        /**
          * Add more theme to the list with more option
          * and send to the adapter
          * @param themes new theme list
@@ -167,6 +194,28 @@ class ColorActivity : AppCompatActivity(),ClickListener {
         fun addMoreThemes(themes:ArrayList<MyTheme>,defaultEnabled:Boolean){
 
             isDefaultEnabled = defaultEnabled
+
+            //clear all data
+            myThemes.clear()
+
+            //add new data
+            myThemes.addAll(themes)
+        }
+
+        /**
+         * Add more theme to the list with more option
+         * and send to the adapter
+         * @param themes new theme list
+         * @param defaultEnabled if developer want to enabled or disable the default theme
+         * @param extraTitle title for the activity
+         */
+        fun addMoreThemes(themes:ArrayList<MyTheme>,defaultEnabled:Boolean,extraTitle:String){
+
+            isDefaultEnabled = defaultEnabled
+
+            if (extraTitle.isNotEmpty()){
+                this.extraTitle = extraTitle
+            }
 
             //clear all data
             myThemes.clear()
