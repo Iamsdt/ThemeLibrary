@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatDelegate
+import androidx.content.edit
 
 
 /**
@@ -20,7 +21,6 @@ class ThemeUtils {
          *
          * @param activity to select theme
          */
-
         fun initialize(activity: Activity) {
             val sp: SharedPreferences = activity.getSharedPreferences(ConstantUtil.colorSp,
                     Context.MODE_PRIVATE)

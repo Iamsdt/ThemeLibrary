@@ -6,7 +6,6 @@ package com.iamsdt.themelibrary
  */
 class ConstantUtil{
     companion object {
-
         //theme
         const val colorSp = "colorSp"
         const val themeKey = "themeKey"

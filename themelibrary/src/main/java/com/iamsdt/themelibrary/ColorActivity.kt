@@ -6,10 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
+import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.content.edit
+import kotlinx.android.synthetic.main.activity_color.*
 import kotlinx.android.synthetic.main.content_color.*
 
 class ColorActivity : AppCompatActivity(),ClickListener {
@@ -18,9 +18,10 @@ class ColorActivity : AppCompatActivity(),ClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         ThemeUtils.initialize(this)
+
         setContentView(R.layout.activity_color)
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
         val manager = LinearLayoutManager(this,
@@ -43,14 +44,6 @@ class ColorActivity : AppCompatActivity(),ClickListener {
      * array list contain theme name and it's id
      */
     private fun fillThemeIds() {
-
-        val list = getThemes()
-
-        //if theme is not empty then add all
-        if (list.isNotEmpty()){
-            themes.addAll(list)
-        }
-
         if (isDefaultEnabled){
             //fill array with styles ids
             themes.add(MyTheme("Default", R.style.LibraryAppTheme_NoActionBar))
@@ -61,17 +54,63 @@ class ColorActivity : AppCompatActivity(),ClickListener {
             themes.add(MyTheme("Deep Orange", R.style.deeporange))
             themes.add(MyTheme("Green", R.style.green))
         }
+
+        val list = getThemes()
+
+        //if theme is not empty then add all
+        if (list.isNotEmpty()){
+            themes.addAll(list)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        //buy calling android.R.id.home
-        val id = item.itemId
-        if (id == android.R.id.home) {
-            onBackPressed()
-            //setResult(Activity.RESULT_OK)
-            finish()
+
+        when (item.itemId){
+            android.R.id.home -> {
+                onBackPressed()
+                //setResult(Activity.RESULT_OK)
+                finish()
+                return true
+            }
+
+            R.id.nightMode ->{
+                if (nightModeStatus){
+                    //night mode on
+                    //now off night mode
+                    turnOffNightMode(this@ColorActivity)
+                    recreate()
+                    nightModeStatus = false
+                } else{
+                    //night mode false
+                    //now on night mode
+                    turnOnNightMode(this@ColorActivity)
+                    recreate()
+                    nightModeStatus = true
+
+                }
+
+                return true
+            }
+
+            else ->
+                return super.onOptionsItemSelected(item)
+
         }
-        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.color,menu)
+
+        val nightMode = menu?.findItem(R.id.nightMode)
+
+        if (nightModeStatus) {
+            nightMode?.setIcon(R.drawable.ic_half_moon)
+        } else {
+            nightMode?.setIcon(R.drawable.ic_wb_sunny_black_24dp)
+        }
+
+        return true
     }
 
     override fun onItemClick(themeID: Int) {
@@ -90,14 +129,26 @@ class ColorActivity : AppCompatActivity(),ClickListener {
     }
 
     companion object {
+        private var nightModeStatus = false
+
         private val myThemes = ArrayList<MyTheme>()
 
         private var isDefaultEnabled = true
 
+        /**
+         * Create Intent for launcher class
+         * @param context of the class
+         * @return Intent
+         */
         fun createIntent(context: Context): Intent {
             return Intent(context, ColorActivity::class.java)
         }
 
+        /**
+         * Add more theme to the list
+         * and send to the adapter
+         * @param themes new theme list
+         */
         fun addMoreThemes(themes:ArrayList<MyTheme>){
 
             //clear all data
@@ -107,6 +158,12 @@ class ColorActivity : AppCompatActivity(),ClickListener {
             myThemes.addAll(themes)
         }
 
+        /**
+         * Add more theme to the list with more option
+         * and send to the adapter
+         * @param themes new theme list
+         * @param defaultEnabled if developer want to enabled or disable the default theme
+         */
         fun addMoreThemes(themes:ArrayList<MyTheme>,defaultEnabled:Boolean){
 
             isDefaultEnabled = defaultEnabled
@@ -119,7 +176,34 @@ class ColorActivity : AppCompatActivity(),ClickListener {
         }
 
 
+        /**
+         * Getter method of theme list
+         */
         private fun getThemes() = myThemes
+
+        /**
+         * Method for turn on night mode
+         * this only change the value of sp
+         * @param context for access sp
+         */
+        private fun turnOnNightMode(context: Context){
+            val sharedPreferences = context.getSharedPreferences(ConstantUtil.NIGHT_MODE_SP_KEY,Context.MODE_PRIVATE)
+            sharedPreferences.edit {
+                putBoolean(ConstantUtil.NIGHT_MODE_VALUE_KEY,true)
+            }
+        }
+
+        /**
+         * Method for turn on night mode
+         * this only change the value of sp
+         * @param context for access sp
+         */
+        private fun turnOffNightMode(context: Context){
+            val sharedPreferences = context.getSharedPreferences(ConstantUtil.NIGHT_MODE_SP_KEY,Context.MODE_PRIVATE)
+            sharedPreferences.edit {
+                putBoolean(ConstantUtil.NIGHT_MODE_VALUE_KEY,false)
+            }
+        }
     }
 
 }

@@ -21,26 +21,26 @@ import kotlinx.android.synthetic.main.color_list_item.view.*
  * Created by Shudipto Trafder on 1/18/2018.
  * at 9:12 PM
  */
-class ColorAdapter(val myTheme:ArrayList<MyTheme>?,
+class ColorAdapter(private val myTheme: ArrayList<MyTheme>,
                    private val context: Context,
-                   private val clickListener: ClickListener):
-        RecyclerView.Adapter<ColorAdapter.ColorViewHolder>(){
+                   private val clickListener: ClickListener) :
+        RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.color_list_item,parent,false)
+                .inflate(R.layout.color_list_item, parent, false)
         return ColorViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ColorViewHolder, position: Int) {
-        val theme = myTheme?.get(position)!!
+        val theme = myTheme[position]
         holder.bindTo(theme)
     }
 
 
     override fun getItemCount(): Int {
-        return myTheme?.size ?: 0
+        return myTheme.size
     }
 
     /**
@@ -50,12 +50,13 @@ class ColorAdapter(val myTheme:ArrayList<MyTheme>?,
      * @param id color id for selected color
      */
 
-    private fun getDrawables(@ColorInt id: Int): Drawable {
+    private fun getDrawablesWithColor(@ColorInt id: Int): Drawable {
         val shapeDrawable = ShapeDrawable(OvalShape())
 
+        //initialize 32 db value
         shapeDrawable.intrinsicWidth = pixelConverter(32)
-
         shapeDrawable.intrinsicHeight = pixelConverter(32)
+
         shapeDrawable.setColorFilter(id, PorterDuff.Mode.SRC)
 
         return shapeDrawable
@@ -88,21 +89,30 @@ class ColorAdapter(val myTheme:ArrayList<MyTheme>?,
         return colorFromTheme
     }
 
-    inner class ColorViewHolder(viewItem:View)
-        :RecyclerView.ViewHolder(viewItem), View.OnClickListener{
+    /*
+     * Holder class of recyclerView
+     */
+    inner class ColorViewHolder(viewItem: View)
+        : RecyclerView.ViewHolder(viewItem), View.OnClickListener {
 
         private val name: TextView = viewItem.color_list_name
         private val primaryColorTxt: TextView = viewItem.color_list_primary
         private val primaryColorDarkTxt: TextView = viewItem.color_list_primaryDark
         private val accentColorTxt: TextView = viewItem.color_list_accent
         //layout
-        private val linearLayout:LinearLayout = viewItem.color_list_linearLayout
+        private val linearLayout: LinearLayout = viewItem.color_list_linearLayout
 
+        /*
+         * set click listener
+         */
         init {
             linearLayout.setOnClickListener(this)
         }
 
-        fun bindTo(myTheme: MyTheme){
+        /*
+         * Methods for bind all view with latest value
+         */
+        fun bindTo(myTheme: MyTheme) {
             //exert from myTheme
             val primaryColor = getThemeColor(myTheme.id, R.attr.colorPrimary)
             val primaryColorDark = getThemeColor(myTheme.id, R.attr.colorPrimaryDark)
@@ -113,9 +123,9 @@ class ColorAdapter(val myTheme:ArrayList<MyTheme>?,
             name.setTextColor(primaryColor)
 
             //circle of color
-            primaryColorTxt.background = getDrawables(primaryColor)
-            primaryColorDarkTxt.background = getDrawables(primaryColorDark)
-            accentColorTxt.background = getDrawables(accentColor)
+            primaryColorTxt.background = getDrawablesWithColor(primaryColor)
+            primaryColorDarkTxt.background = getDrawablesWithColor(primaryColorDark)
+            accentColorTxt.background = getDrawablesWithColor(accentColor)
         }
 
         override fun onClick(v: View?) {
