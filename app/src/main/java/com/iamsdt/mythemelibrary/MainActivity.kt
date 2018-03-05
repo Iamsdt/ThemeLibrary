@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         mainBtn.setOnClickListener {
-            ColorActivity.addMoreThemes(getList())
+            ColorActivity.addMoreThemes(getList(),"Color")
             startActivityForResult(ColorActivity.createIntent(this),themeRequestCode)
         }
 

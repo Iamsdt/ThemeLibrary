@@ -14,11 +14,12 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:layout_marginTop="48dp"
-        android:text="Hello World!"
+        android:text="Chose Color"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/settingsBtn"
