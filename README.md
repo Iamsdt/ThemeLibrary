@@ -19,7 +19,7 @@ allprojects {
 now add the dependency
 ````
 dependencies {
-    implementation 'com.github.Iamsdt:ThemeLibrary:1.5'
+    implementation 'com.github.Iamsdt:ThemeLibrary:1.7'
 }
 ````
 
@@ -107,3 +107,4 @@ want to hide night mode icon
 ````
 ColorActivity.hideNightModeIcon()
 ````
+
