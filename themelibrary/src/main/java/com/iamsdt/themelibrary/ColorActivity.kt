@@ -6,9 +6,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_color.*
 import kotlinx.android.synthetic.main.content_color.*
 
 class ColorActivity : AppCompatActivity(), ClickListener {
@@ -23,12 +23,14 @@ class ColorActivity : AppCompatActivity(), ClickListener {
 
         setContentView(R.layout.activity_color)
 
+        val toolbar = findViewById<Toolbar>(R.id.themeToolbar)
+
         //toolbar
         if (extraTitle.isNotEmpty()) {
-            themeToolbar.title = extraTitle
+            toolbar.title = extraTitle
         }
 
-        setSupportActionBar(themeToolbar)
+        setSupportActionBar(toolbar)
 
 
         val manager = LinearLayoutManager(this,
