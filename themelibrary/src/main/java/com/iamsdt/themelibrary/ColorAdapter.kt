@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.color_list_item.view.*
  * Created by Shudipto Trafder on 1/18/2018.
  * at 9:12 PM
  */
-class ColorAdapter(private val myTheme: ArrayList<MyTheme>,
+internal data class ColorAdapter(private val myTheme: ArrayList<MyTheme>,
                    private val context: Context,
                    private val clickListener: ClickListener) :
         RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {

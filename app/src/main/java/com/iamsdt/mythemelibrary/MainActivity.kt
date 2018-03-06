@@ -2,8 +2,8 @@ package com.iamsdt.mythemelibrary
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.iamsdt.themelibrary.ColorActivity
 import com.iamsdt.themelibrary.MyTheme
 import com.iamsdt.themelibrary.ThemeUtils
@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         mainBtn.setOnClickListener {
-            ColorActivity.addMoreThemes(getList(),"Color")
+            ColorActivity.updateToolbarTitle("Color")
+            //ColorActivity.addMoreThemes(getList())
             //ColorActivity.hideNightModeIcon()
             startActivityForResult(ColorActivity.createIntent(this),themeRequestCode)
         }

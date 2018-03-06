@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import androidx.content.edit
 import kotlinx.android.synthetic.main.activity_color.*
 import kotlinx.android.synthetic.main.content_color.*
 
@@ -26,9 +25,11 @@ class ColorActivity : AppCompatActivity(), ClickListener {
 
         //toolbar
         if (extraTitle.isNotEmpty()) {
-            toolbar.title = extraTitle
+            themeToolbar.title = extraTitle
         }
-        setSupportActionBar(toolbar)
+
+        setSupportActionBar(themeToolbar)
+
 
         val manager = LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false)
@@ -119,7 +120,9 @@ class ColorActivity : AppCompatActivity(), ClickListener {
         val themeCont = themes[themeID]
 
         val sp = getSharedPreferences(ConstantUtil.colorSp, Context.MODE_PRIVATE)
-        sp.edit { putInt(ConstantUtil.themeKey, themeCont.id) }
+        val editor = sp.edit()
+        editor.putInt(ConstantUtil.themeKey, themeCont.id)
+        editor.apply()
 
         restartActivity()
     }
@@ -242,10 +245,10 @@ class ColorActivity : AppCompatActivity(), ClickListener {
          * @param context for access sp
          */
         private fun turnOnNightMode(context: Context) {
-            val sharedPreferences = context.getSharedPreferences(ConstantUtil.NIGHT_MODE_SP_KEY, Context.MODE_PRIVATE)
-            sharedPreferences.edit {
-                putBoolean(ConstantUtil.NIGHT_MODE_VALUE_KEY, true)
-            }
+            val sp = context.getSharedPreferences(ConstantUtil.NIGHT_MODE_SP_KEY, Context.MODE_PRIVATE)
+            val editor = sp.edit()
+            editor.putBoolean(ConstantUtil.NIGHT_MODE_VALUE_KEY, true)
+            editor.apply()
         }
 
         /**
@@ -254,10 +257,11 @@ class ColorActivity : AppCompatActivity(), ClickListener {
          * @param context for access sp
          */
         private fun turnOffNightMode(context: Context) {
-            val sharedPreferences = context.getSharedPreferences(ConstantUtil.NIGHT_MODE_SP_KEY, Context.MODE_PRIVATE)
-            sharedPreferences.edit {
-                putBoolean(ConstantUtil.NIGHT_MODE_VALUE_KEY, false)
-            }
+            val sp = context.getSharedPreferences(ConstantUtil.NIGHT_MODE_SP_KEY, Context.MODE_PRIVATE)
+
+            val editor = sp.edit()
+            editor.putBoolean(ConstantUtil.NIGHT_MODE_VALUE_KEY, false)
+            editor.apply()
         }
     }
 

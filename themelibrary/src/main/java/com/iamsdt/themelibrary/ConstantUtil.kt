@@ -4,7 +4,7 @@ package com.iamsdt.themelibrary
  * Created by Shudipto Trafder on 11/23/2017.
  * at 11:58 PM
  */
-class ConstantUtil{
+internal class ConstantUtil{
     companion object {
         //theme
         const val colorSp = "colorSp"
