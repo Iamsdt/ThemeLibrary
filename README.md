@@ -9,7 +9,7 @@ On the other hand you can customize as your requirement.
 See some screenshot
 ![Sample 1][sample1]
 
-[sample1]: \img\sample1.png "Deafult theme list"
+[sample1]: ../master/img/sample1.png "Deafult theme list"
 
 ### Prerequisites
 The minimum api for this library is **17** (Android 4.2)
