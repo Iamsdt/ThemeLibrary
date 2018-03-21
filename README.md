@@ -19,7 +19,7 @@ allprojects {
 now add the dependency
 ````
 dependencies {
-    implementation 'com.github.Iamsdt:ThemeLibrary:1.7'
+    implementation 'com.github.Iamsdt:ThemeLibrary:2.0'
 }
 ````
 
