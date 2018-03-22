@@ -1,5 +1,5 @@
 # ThemeLibrary
-A very easy Android theme library for choose theme.
+A very easy Android theme library for choose theme at runtime.
 
 ### Getting Started
 Very easy to provide option to user to change theme on their choice. This library has already some prebuilt theme.
