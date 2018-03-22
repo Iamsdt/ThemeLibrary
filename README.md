@@ -7,10 +7,16 @@ So if you want to provide more option it's very easy.
 On the other hand you can customize as your requirement.
 
 See some screenshot
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+
 ![Sample 1][sample1]
 
 [sample1]: ../master/img/sample1.png "Deafult theme list"
-
 ### Prerequisites
 The minimum api for this library is **17** (Android 4.2)
 
