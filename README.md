@@ -2,9 +2,9 @@
 A very easy Android theme library for choose theme at runtime.
 
 ### Getting Started
-Very easy to provide option to user to change theme on their choice. This library has already some prebuilt theme.
+Very easy to provide an option to the user to change the theme of their choice. This library has already some prebuilt theme.
 So if you want to provide more option it's very easy.
-On the other hand you can customize according to your requirement.
+On the other hand, you can customize according to your requirement.
 
 ##### See some screenshot </br>
 
@@ -19,10 +19,10 @@ On the other hand you can customize according to your requirement.
 
 
 ### Prerequisites
-The minimum api for this library is **17** (Android 4.2)
+The minimum API for this library is **17** (Android 4.2)
 
 ### Installing
-Add it in your root `build.gradle` at the end of repositories:
+Add it to your root `build.gradle` at the end of repositories:
 ````
 allprojects {
     repositories {
