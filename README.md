@@ -6,15 +6,18 @@ Very easy to provide option to user to change theme on their choice. This librar
 So if you want to provide more option it's very easy.
 On the other hand you can customize as your requirement.
 
-See some screenshot
-Attempt | #1 | #2 | #3 | #4 | #5 | #6 | #7 | #8 | #9 | #10 | #11
---- | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |---
-Seconds | 301 | 283 | 290 | 286 | 289 | 285 | 287 | 287 | 272 | 276 | 269
+See some screenshot </br>
 
-
-![Sample 1][sample1]
+| ![Sample 1][sample1] | ![Sample 1][sample2] | ![Sample 1][sample3] | ![Sample 1][sample4] |
+|--- | --- | --- | ---|
+| Sample 1 | Sample 2 | Night mode | Preference Fragment| 
 
 [sample1]: ../master/img/sample1.png "Deafult theme list"
+[sample2]: ../master/img/sample1.png "Deafult theme list"
+[sample3]: ../master/img/sample1.png "Deafult theme list"
+[sample4]: ../master/img/sample1.png "Deafult theme list"
+
+
 ### Prerequisites
 The minimum api for this library is **17** (Android 4.2)
 
