@@ -13,9 +13,9 @@ See some screenshot </br>
 | Sample 1 | Sample 2 | Night mode | Preference Fragment| 
 
 [sample1]: ../master/img/sample1.png "Deafult theme list"
-[sample2]: ../master/img/sample1.png "Deafult theme list"
-[sample3]: ../master/img/sample1.png "Deafult theme list"
-[sample4]: ../master/img/sample1.png "Deafult theme list"
+[sample2]: ../master/img/sample2.png "Deafult theme list2"
+[sample3]: ../master/img/nightmode.png "Night mode"
+[sample4]: ../master/img/preference.png "Preference theme"
 
 
 ### Prerequisites
