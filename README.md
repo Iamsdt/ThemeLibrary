@@ -124,7 +124,7 @@ ColorActivity.hideNightModeIcon()
 ````
 
 ### Licence
-####MIT License
+#### MIT License
 
 Copyright (c) 2018 **Shudipto Trafder**
 
